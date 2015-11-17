@@ -1,0 +1,51 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Wines</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Image url</th>
+      <th>Shortdescription</th>
+      <th>Bottlesize</th>
+      <th>Price</th>
+      <th>Company</th>
+      <th>Longdescription</th>
+      <th>Country</th>
+      <th>Grape</th>
+      <th>Vegetarians</th>
+      <th>Title</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @wines.each do |wine| %>
+      <tr>
+        <td><%= wine.image_url %></td>
+        <td><%= wine.shortDescription %></td>
+        <td><%= wine.bottleSize %></td>
+        <td><%= wine.price %></td>
+        <td><%= wine.company %></td>
+        <td><%= wine.longDescription %></td>
+        <td><%= wine.country %></td>
+        <td><%= wine.grape %></td>
+        <td><%= wine.vegetarians %></td>
+        <td><%= wine.title %></td>
+        <td><%= link_to(image_tag('test.jpg', alt: 'Show', title: 'Show Details', border: '0'), wine_path(wine, page: @wines.current_page)) %></td>
+        <td><%= link_to 'Edit', edit_wine_path(wine) %></td>
+        <td><%= link_to 'Destroy', wine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+ <div class="digg_pagination">
+      <div>
+        <%= page_entries_info @wines %>
+      </div>
+      <%= will_paginate @wines,container: false%>
+ </div>
+<br>
+
+   
+<%= link_to 'New Wine', new_wine_path(page: @wines.current_page) %>
