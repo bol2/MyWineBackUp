@@ -34,8 +34,13 @@ require 'uri'
        wine.destroy
     end
     getWinefromDB
-    @wines = Wine.paginate(page: params[:page],per_page: params[:per_page])
-  end
+    
+    if params[:search]
+	 @wines = Wine.paginate(page: params[:page],per_page: params[:per_page]).order('title ASC').search(params[:search])
+    else 
+         @wines = Wine.paginate(page: params[:page],per_page: params[:per_page]).order('title ASC')
+    end
+ end
 
   # GET /wines/1
   # GET /wines/1.json
